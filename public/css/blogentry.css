@@ -1,0 +1,45 @@
+.blog-entries {
+    display: grid;
+    /*grid-auto-rows: 100px;*/
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 1em;
+}
+
+.blog-entry {
+    border-radius: 8px;
+    padding: 20px;
+    color: #fff;
+}
+
+.blog-entry:nth-child(odd) {
+    background-color: #9160cf;
+}
+
+.blog-entry:nth-child(even) {
+    background-color: #631bc2;
+}
+
+.blog-title a {
+    font-weight: 600;
+    padding-left: 12px;
+}
+
+/* unvisited link */
+a:link {
+    color: unset;
+}
+
+/* visited link */
+a:visited {
+    color: unset;
+}
+
+/* mouse over link */
+a:hover {
+    color: unset;
+}
+
+/* selected link */
+a:active {
+    color: unset;
+}
