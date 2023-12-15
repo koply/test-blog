@@ -2,8 +2,8 @@
 
 @section("head")
     @php
-        App\Util\Modal::install_jquery();
-        App\Util\Modal::install_bootstrap();
+        App\Util\ModalGenerator::install_jquery();
+        App\Util\ModalGenerator::install_bootstrap();
     @endphp
 @endsection
 
@@ -11,7 +11,7 @@
 
     @if (session()->has("message"))
         @php
-            $modal = App\Util\Modal::generate(session("title"), session("message"));
+            $modal = App\Util\ModalGenerator::generate(session("title"), session("message"));
             session()->forget(["message", "title"]);
             $modal->render(true);
         @endphp

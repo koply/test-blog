@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,14 +33,16 @@ class UserController extends Controller {
         return redirect()->route('login');
     }
 
-    public function login(Request $req) {
+    public function login(Request $req): RedirectResponse
+    {
         $req->validate([
             'email' => 'required',
             'password' => 'required',
         ]);
+        $req->session()->flash("msg-title", "Blogium Panel");
         if (Auth::attempt(['email' => $req->email, 'password' => $req->password])) {
             $req->session()->regenerate();
-            $req->session()->flash("login-success");
+            $req->session()->flash("msg", "Hos geldiniz!");
             return redirect()->intended(route("panel"));
         }
 
@@ -45,14 +50,15 @@ class UserController extends Controller {
         return back();
     }
 
-    public function logout() {
+    public function logout(): RedirectResponse
+    {
         Auth::logout();
         session()->invalidate();
         session()->regenerateToken();
         return redirect()->intended(route("home"));
     }
 
-    public function index()
+    public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application|RedirectResponse
     {
         if (Auth::check()) {
             return redirect()->intended(route("panel"));
@@ -61,51 +67,4 @@ class UserController extends Controller {
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

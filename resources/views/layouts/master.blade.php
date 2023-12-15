@@ -27,17 +27,18 @@ $navs = auth()->check() ? array_merge($navs, $loggedInNav) : array_merge($navs, 
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
 
-    <link href="css/master.css" rel="stylesheet" />
+    <link href="/css/master.css" rel="stylesheet" />
 
-    <link href="css/style.css" rel="stylesheet" />
+    <link href="/css/style.css" rel="stylesheet" />
 
-    <link href="css/responsive.css" rel="stylesheet" />
+    <link href="/css/responsive.css" rel="stylesheet" />
 
     @yield("head")
+    @yield("head-modal")
 </head>
 
 <body>
@@ -98,8 +99,8 @@ $navs = auth()->check() ? array_merge($navs, $loggedInNav) : array_merge($navs, 
 </section>
 <!-- footer section -->
 
-<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.js"></script>
 
 </body>
 

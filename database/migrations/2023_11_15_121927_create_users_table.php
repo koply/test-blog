@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->integer("permissions")->default(0);
+            $table->string('name', 32);
+            $table->string('email', 32)->unique();
+            $table->string('password', 16);
+
+            // todo change to laravel permission
+            $table->integer('permissions')->default(0);
             $table->timestamps();
         });
     }

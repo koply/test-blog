@@ -1,13 +1,6 @@
-@isset($entry) @else
-    @php
-        $title = "404";
-        $author = "404";
-        $summary = "summary 404"
-    @endphp
-@endisset
-
 @once
 <link href="css/blogentry.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 @endonce
 
 <div class="blog-entry">
@@ -16,8 +9,9 @@
         <a href="{{ url("blogs/".$entry->id)  }}">{{ $entry->title }}</a>
     </h3>
     <div class="blog-author">
+        <i class="fas fa-user"></i>
         <p>
-            {{ $entry->author }}
+            {{ $entry->authorname }}
         </p>
     </div>
     <div class="blog-summary">

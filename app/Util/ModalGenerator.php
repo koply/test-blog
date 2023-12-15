@@ -1,7 +1,7 @@
 <?php
 namespace App\Util;
 
-class Modal {
+class ModalGenerator {
 
     private string $title = "";
     private string $desc = "";
@@ -12,8 +12,8 @@ class Modal {
     private bool $is_large = false;
     private bool $remove_second_close = false;
 
-    public static function generate(string $title, string $desc) :Modal {
-        $obj = new Modal();
+    public static function generate(string $title, string $desc) :ModalGenerator {
+        $obj = new ModalGenerator();
         $obj->title = $title;
         $obj->desc = $desc;
         return $obj;
@@ -28,37 +28,37 @@ class Modal {
         echo('<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>');
     }
 
-    public function add_button(string $text, string $attribute = "", string $class = "btn-secondary") :Modal {
+    public function add_button(string $text, string $attribute = "", string $class = "btn-secondary") :ModalGenerator {
         $this->buttons .= "<button type='button' class='btn $class' $attribute>$text</button>";
         return $this;
     }
 
-    public function add_close_button() :Modal {
+    public function add_close_button() :ModalGenerator {
         $this->add_button("Close", "data-bs-dismiss='modal'");
         return $this;
     }
 
-    public function insert_button(string $html) :Modal {
+    public function insert_button(string $html) :ModalGenerator {
         $this->buttons .= $html;
         return $this;
     }
 
-    public function insert_html(string $html) :Modal {
+    public function insert_html(string $html) :ModalGenerator {
         $this->inside_html .= $html;
         return $this;
     }
 
-    public function set_centered() :Modal {
+    public function set_centered() :ModalGenerator {
         $this->is_centered = true;
         return $this;
     }
 
-    public function set_large() :Modal {
+    public function set_large() :ModalGenerator {
         $this->is_large = true;
         return $this;
     }
 
-    public function remove_second_close_button() :Modal {
+    public function remove_second_close_button() :ModalGenerator {
         $this->remove_second_close = true;
         return $this;
     }

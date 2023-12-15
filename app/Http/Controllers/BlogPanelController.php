@@ -2,66 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class BlogPanelController extends Controller
 {
 
-
-
-    public function index() {
+    public function index()
+    {
         return view("panel");
     }
 
-
-
-
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function create(Request $req)
     {
-        //
+        $user = User::find(Auth::id());
+        $blog = new Blog([
+            'title' => $req->title,
+            'authorid' => $user->id,
+            'authorname' => $user->name,
+            'summary' => $req->summary,
+            'content' => $req->text,
+        ]);
+        $blog->save();
+
+        $count = DB::table('blogs')->where("authorid", $user->id)->count('authorid');
+
+        /**
+         * SELECT COUNT(CustomerID) AS OrdersFromCustomerID7 FROM Orders
+         * WHERE CustomerID=7;
+         */
+        $req->session()->flash('msg-title', 'Blog Created');
+        $req->session()->flash('msg', "Good job! Thats your $count. entry.");
+        return redirect()->intended(route("panel"));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }
